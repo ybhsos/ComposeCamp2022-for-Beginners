@@ -22,15 +22,49 @@ import com.example.composequadrant.ui.theme.ComposeQuadrantTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { }
+        setContent {
+            ComposeQuadrantTheme{
+                Surface(
+                    color = MaterialTheme.colors.background
+                ) {
+                    ComposeQuadrantApp()
+                }
+            }
+        }
     }
 }
 
 @Composable
 fun ComposeQuadrantApp() {
-    Column() {
-        Row() { }
-        Row() { }
+    Column(Modifier.fillMaxWidth()) {
+        Row(Modifier.weight(1f)) {
+            ComposableInfoCard(
+                stringResource(R.string.first_title) ,
+                stringResource(R.string.first_description),
+                androidx.compose.ui.graphics.Color.Green,
+                modifier = Modifier.weight(1f)
+            )
+            ComposableInfoCard(
+                stringResource(R.string.second_title) ,
+                stringResource(R.string.second_description),
+                androidx.compose.ui.graphics.Color.Yellow,
+                modifier = Modifier.weight(1f)
+            )
+        }
+        Row(Modifier.weight(1f)) {
+            ComposableInfoCard(
+                stringResource(R.string.third_title) ,
+                stringResource(R.string.third_description),
+                androidx.compose.ui.graphics.Color.Cyan,
+                modifier = Modifier.weight(1f)
+            )
+            ComposableInfoCard(
+                stringResource(R.string.fourth_title) ,
+                stringResource(R.string.fourth_description),
+                androidx.compose.ui.graphics.Color.LightGray,
+                modifier = Modifier.weight(1f)
+            )
+        }
     }
 }
 
@@ -41,7 +75,24 @@ private fun ComposableInfoCard(
     backgroundColor: Color,
     modifier: Modifier = Modifier
 ) {
-    Column( ) { }
+    Column( modifier = modifier
+        .background(backgroundColor)
+        .padding(start =16.dp, end=16.dp, top = 16.dp, bottom = 16.dp)
+        .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = title,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(bottom = 16.dp)
+            )
+            Text(
+                text = description,
+            )
+
+        }
 }
 
 
